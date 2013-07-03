@@ -193,9 +193,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion in(char[] values) {
-		List<Character> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
@@ -205,9 +203,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion in(double[] values) {
-		List<Double> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
@@ -220,23 +216,17 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion in(float[] values) {
-		List<Float> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
 	public Criterion in(int[] values) {
-		List<Integer> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
 	public Criterion in(long[] values) {
-		List<Long> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
@@ -246,9 +236,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion in(short[] values) {
-		List<Short> list = ListUtil.toList(values);
-
-		return in(list);
+		return in(ListUtil.toList(values));
 	}
 
 	@Override
