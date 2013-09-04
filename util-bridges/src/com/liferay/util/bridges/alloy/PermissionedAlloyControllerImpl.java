@@ -23,7 +23,9 @@ public abstract class PermissionedAlloyControllerImpl
 	@Override
 	public void execute() throws Exception {
 		if (!AlloyPermission.contains(
-			themeDisplay, controllerPath, actionPath)) {
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), portlet.getRootPortletId(),
+				controllerPath, actionPath)) {
 
 			renderError("you-do-not-have-permission-to-access-this-resource");
 		}
