@@ -18,7 +18,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.bean.ConstantsBeanFactoryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -222,7 +221,9 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			try {
 				persistedModel.persist();
 			}
-			catch (SystemException se) {
+			catch (Exception e) {
+				log.error(e, e);
+
 				renderError("an-unexpected-system-error-occurred");
 
 				return;
