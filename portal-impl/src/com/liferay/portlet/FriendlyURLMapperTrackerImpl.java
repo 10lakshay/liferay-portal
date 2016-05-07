@@ -147,9 +147,7 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 				if (Validator.isNotNull(friendlyURLRoutes)) {
 					Class<?> clazz = friendlyURLMapper.getClass();
 
-					ClassLoader classLoader = clazz.getClassLoader();
-
-					xml = getContent(friendlyURLRoutes, classLoader);
+					xml = getContent(friendlyURLRoutes, clazz.getClassLoader());
 				}
 
 				friendlyURLMapper.setRouter(newFriendlyURLRouter(xml));
@@ -179,22 +177,19 @@ public class FriendlyURLMapperTrackerImpl implements FriendlyURLMapperTracker {
 			registry.ungetService(serviceReference);
 		}
 
-		protected String getContent (
-			String friendlyURLRoutes, ClassLoader classLoader)
-				throws Exception {
+		protected String getContent(String fileName, ClassLoader classLoader)
+			throws Exception {
 
-			String friendlyURLRoutesFileName = friendlyURLRoutes;
+			String queryString = HttpUtil.getQueryString(fileName);
 
-			if (friendlyURLRoutesFileName.contains(StringPool.QUESTION)) {
-				friendlyURLRoutesFileName = friendlyURLRoutesFileName.substring(
-					0, friendlyURLRoutesFileName.indexOf(StringPool.QUESTION));
+			if (Validator.isNull(queryString)) {
+				return StringUtil.read(classLoader, fileName);
 			}
 
-			String xml = StringUtil.read(
-				classLoader, friendlyURLRoutesFileName);
+			int pos = fileName.indexOf(StringPool.QUESTION);
 
-			String queryString = friendlyURLRoutes.substring(
-				friendlyURLRoutes.indexOf(StringPool.QUESTION) + 1);
+			String xml = StringUtil.read(
+				classLoader, fileName.substring(0, pos));
 
 			Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
 				queryString);
