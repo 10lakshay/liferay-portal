@@ -135,6 +135,7 @@ public class ConstantsBeanFactoryImpl implements ConstantsBeanFactory {
 			methodVisitor.visitInsn(fieldType.getOpcode(Opcodes.IRETURN));
 
 			methodVisitor.visitMaxs(fieldType.getSize(), 1);
+
 			methodVisitor.visitEnd();
 		}
 
@@ -181,6 +182,7 @@ public class ConstantsBeanFactoryImpl implements ConstantsBeanFactory {
 
 			methodVisitor.visitMaxs(
 				stackIndex + returnType.getSize(), parameterTypes.length + 1);
+
 			methodVisitor.visitEnd();
 		}
 
