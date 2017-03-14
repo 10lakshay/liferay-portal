@@ -429,7 +429,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected String buildIncludePath(String viewPath) {
-		StringBundler sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("/WEB-INF/jsp/");
 		sb.append(portlet.getFriendlyURLMapping());
@@ -439,20 +439,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			sb.append("error.jsp");
 
 			return sb.toString();
-		}
-
-		sb = new StringBundler(new String[] {sb.toString()}, 2);
-
-
-		if (viewPath.contains(StringPool.DOUBLE_PERIOD)) {
-			sb.append(StringPool.SLASH);
-			viewPath = StringUtil.replace(
-				viewPath, StringPool.DOUBLE_PERIOD + StringPool.SLASH,
-				StringPool.BLANK);
-		}
-		else {
-			sb.append(controllerPath);
-			sb.append(StringPool.SLASH);
 		}
 
 		sb.append(viewPath);
@@ -532,7 +518,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		if (Validator.isNull(responseContent)) {
 			if (Validator.isNull(viewPath)) {
-				viewPath = actionPath;
+				viewPath = controllerPath + StringPool.SLASH + actionPath;
 			}
 
 			String includePath = buildIncludePath(viewPath);
